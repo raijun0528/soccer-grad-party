@@ -27,7 +27,7 @@ const revealObserver = new IntersectionObserver(
 
 reveals.forEach((el) => revealObserver.observe(el));
 
-const kickoffDate = new Date('2026-03-14T16:30:00+09:00');
+const farewellEndDate = new Date('2026-03-15T05:00:00+09:00');
 const dayEl = document.getElementById('days');
 const hourEl = document.getElementById('hours');
 const minEl = document.getElementById('minutes');
@@ -35,7 +35,7 @@ const minEl = document.getElementById('minutes');
 const updateCountdown = () => {
   if (!dayEl || !hourEl || !minEl) return;
   const now = new Date();
-  const diff = kickoffDate.getTime() - now.getTime();
+  const diff = now.getTime() - farewellEndDate.getTime();
 
   if (diff <= 0) {
     dayEl.textContent = '0';
@@ -197,11 +197,6 @@ if (photoArchiveSection) {
   );
   photoArchiveObserver.observe(photoArchiveSection);
 }
-
-const aboutReelPhotos = document.querySelectorAll('.about-reel .about-reel-photo');
-aboutReelPhotos.forEach((photo, index) => {
-  photo.style.zIndex = String(index + 1);
-});
 
 const graduateDisplayOrder = [
   '種谷響希',
