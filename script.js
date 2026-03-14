@@ -68,6 +68,7 @@ const fourthYearGallery = document.getElementById('photo-gallery-4th');
 const thirdYearGallery = document.getElementById('photo-gallery-3rd');
 const secondYearGallery = document.getElementById('photo-gallery-2nd');
 const firstYearGallery = document.getElementById('photo-gallery-1st');
+const day1Gallery = document.getElementById('photo-gallery-day1');
 const photoArchiveSection = document.getElementById('photoarchive');
 const photoModal = document.getElementById('photo-modal');
 const photoModalImage = document.getElementById('photo-modal-image');
@@ -79,6 +80,7 @@ const openPhotoModal = (src, alt) => {
   photoModalImage.alt = alt;
   photoModal.classList.add('open');
   photoModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
 };
 
 const closePhotoModal = () => {
@@ -86,6 +88,7 @@ const closePhotoModal = () => {
   photoModal.classList.remove('open');
   photoModal.setAttribute('aria-hidden', 'true');
   photoModalImage.src = '';
+  document.body.classList.remove('modal-open');
 };
 
 if (photoModalClose) {
@@ -144,40 +147,54 @@ const renderPhotoGalleryRange = ({ gallery, start, end, directory, altPrefix }) 
   }
 };
 
+const renderPhotoPlaceholders = ({ gallery, count = 8, label = '写真を追加' }) => {
+  if (!gallery) return;
+  for (let i = 0; i < count; i += 1) {
+    const figure = document.createElement('figure');
+    figure.className = 'photo-card photo-card-placeholder';
+
+    const text = document.createElement('span');
+    text.className = 'photo-card-placeholder-text';
+    text.textContent = label;
+
+    figure.appendChild(text);
+    gallery.appendChild(figure);
+  }
+};
+
 let photoArchiveRendered = false;
 const renderPhotoArchive = () => {
   if (photoArchiveRendered) return;
   photoArchiveRendered = true;
 
-  renderPhotoGalleryRange({
+  renderPhotoPlaceholders({
+    gallery: day1Gallery,
+    count: 12,
+    label: 'DAY1 写真を追加',
+  });
+
+  renderPhotoPlaceholders({
     gallery: fourthYearGallery,
-    start: 1,
-    end: 50,
-    directory: 'photowall-2nd',
-    altPrefix: 'ANFINI 4th-year photo',
+    count: 8,
+    label: '4回生 写真を追加',
   });
 
-  renderPhotoGalleryRange({
+  renderPhotoPlaceholders({
     gallery: thirdYearGallery,
-    start: 51,
-    end: 100,
-    directory: 'photowall-2nd',
-    altPrefix: 'ANFINI 3rd-year photo',
+    count: 8,
+    label: '3回生 写真を追加',
   });
 
-  renderPhotoGalleryRange({
+  renderPhotoPlaceholders({
     gallery: secondYearGallery,
-    start: 101,
-    end: 145,
-    directory: 'photowall-2nd',
-    altPrefix: 'ANFINI 2nd-year photo',
+    count: 8,
+    label: '2回生 写真を追加',
   });
 
-  renderPhotoGallery({
+  renderPhotoPlaceholders({
     gallery: firstYearGallery,
-    photoCount: 125,
-    directory: 'photowall-1st',
-    altPrefix: 'ANFINI 1st-year photo',
+    count: 8,
+    label: '1回生 写真を追加',
   });
 };
 
@@ -256,33 +273,50 @@ if (personalMovieGrid) {
     '島田紗千',
   ];
   const personalMovieSources = {
+    永樂心優: 'assets/movies/eiraku-miyu.mp4',
+    成本茉莉: 'assets/movies/narimoto-matsuri.mp4',
+    西田典立: 'assets/movies/nishida-norisato.mp4',
+    小比賀華子: 'assets/movies/kobiga-hanako.mp4',
+    岩佐茅咲: 'assets/movies/iwasa-chisaki.mp4',
+    荒岡美夢: 'assets/movies/araoka-miyu.mp4',
+    園田響己: 'assets/movies/sonoda-hibiki.mp4',
+    大澤夏海: 'assets/movies/osawa-natsumi.mp4',
+    久保田圭祐: 'assets/movies/kubota-keisuke.mp4',
+    長谷川斗空: 'assets/movies/hasegawa-toa.mp4',
+    種谷響希: 'assets/movies/tanetani-hibiki.mp4',
     磯崎友希: 'assets/movies/isozaki-yuki.mp4',
-    三浦航大: 'assets/movies/miura-kodai.mp4',
+    三浦航大: 'assets/movies/miura-kota.mp4',
+    木村遥輝: 'assets/movies/kimura-haruki.mp4',
+    田中柚希: 'assets/movies/tanaka-yuzuki.mp4',
+    島田紗千: 'assets/movies/shimada-sachi.mp4',
+    布山達也: 'assets/movies/nunoyama-tatsuya.mp4',
     奥原沙理: 'assets/movies/okuhara-sari.mp4',
     小玉拓未: 'assets/movies/kodama-takumi.mp4',
+    堀内うらら: 'assets/movies/horiuchi-urara.mp4',
+    陣内海璃: 'assets/movies/jinnai-kairi.mp4',
   };
   const personalMovieSongs = {
-    永樂心優: '未入力',
+    永樂心優: '夏は巡る',
     成本茉莉: '未入力',
-    西田典立: '妖怪体操第一',
+    西田典立: 'ようかい体操第一',
     辻拓真: '水曜日のダウンタウンOP',
-    小比賀華子: '未入力',
-    岩佐茅咲: '未入力',
-    種谷響希: 'Super Ocean Man',
-    三浦航大: '未入力',
-    木村遥輝: '未入力',
+    小比賀華子: '会いにKiTE!',
+    岩佐茅咲: 'JAM',
+    種谷響希: 'Super Ocean man',
+    三浦航大: 'デッドマンズチェイス',
+    木村遥輝: 'ワンドリンク別',
     田中柚希: '未入力',
-    園田響己: '未入力',
-    大澤夏海: '未入力',
+    園田響己: 'トリコ',
+    大澤夏海: '愛でした。',
     奥原沙理: '未入力',
-    久保田圭祐: '未入力',
-    長谷川斗空: '未入力',
-    布山達也: '完全感覚DREAMER',
-    磯崎友希: '-',
+    久保田圭祐: 'タマシイレボリューション',
+    長谷川斗空: 'はちゃめちゃわちゃライフ！',
+    布山達也: '完全感覚ドリーマー',
+    磯崎友希: '突破口',
     小玉拓未: 'はじまり',
     堀内うらら: '未入力',
     陣内海璃: 'imagine if',
-    荒岡美夢: '未入力',
+    荒岡美夢: 'Shout to My Ex',
     島田紗千: '未入力',
   };
 
@@ -297,6 +331,9 @@ if (personalMovieGrid) {
     const song = document.createElement('p');
     song.className = 'movie-song';
     song.textContent = `曲名: ${personalMovieSongs[name] || '未入力'}`;
+    if (name === '久保田圭祐') {
+      song.classList.add('movie-song-nowrap');
+    }
 
     let slot;
     if (personalMovieSources[name]) {
@@ -393,7 +430,7 @@ if (graduateProfiles) {
       name: '種谷響希',
       university: '京都大学理学部',
       birthdate: '2003.11.29',
-      nickname: 'アンストッパブルな<br>イカれキャプテン',
+      nickname: 'アンストッパブルな熱血キャプテン',
       photos: [
         'assets/graduates/tanetani-1.jpg',
         'assets/graduates/tanetani-2.jpg',
@@ -428,6 +465,7 @@ if (graduateProfiles) {
       name: '田中柚希',
       university: '同志社大学商学部',
       birthdate: '2004/01/03',
+      nickname: '後輩マネの参考書 ～教えて 酔い方 潰れ方～',
       photos: [
         'assets/graduates/tanaka-1.jpg',
         'assets/graduates/tanaka-2.jpg',
@@ -529,6 +567,8 @@ if (graduateProfiles) {
       university: '同志社女子大学　看護学部',
       birthdate: '2003.4.12',
       nickname: '飲み干す横顔が好きでした。',
+      description:
+        'Anfini屈指、いや日本屈指の容姿端麗美貌、うらら。通称うらぽり。Anfiniの遊びで見かけることは数少なく、それもまた魔性の女感を出してました。正直いうと、もっともっとanfiniの遊びでお見えになりたかったです。後輩みんなからの総意。飲みのグルでうららさんいるやんって思ったら、だいたいつぶから。飲み干す横顔が好きでした。意外と気さくで話しやすかったりもして最強の女性です。',
       photos: [
         'assets/graduates/horiuchi-1.jpg',
         'assets/graduates/horiuchi-2.jpg',
@@ -562,6 +602,8 @@ if (graduateProfiles) {
       university: '同志社大学商学部',
       birthdate: '2003.08.20',
       nickname: '天真爛漫愛され歌姫',
+      description:
+        '一度話すと「さちワールド」に引きずり込まれ、誰しも心が穏やかになっていく。”天真爛漫”の言葉を欲しいままにした28th屈指の天然マネージャー。それでいて邦ロックオタクなのもまた良いんですよ。先輩後輩、同期問わず愛されるさちさんが同じ遊びにいたら気分はルンルン。音程外しながらも一生懸命に歌う姿も可愛かったなあ。',
       photos: [
         'assets/graduates/shimada-1.jpg',
         'assets/graduates/shimada-2.jpg',
@@ -616,6 +658,7 @@ if (graduateProfiles) {
     const nicknameClass = femaleGraduateNames.has(graduate.name)
       ? 'graduate-nickname-female'
       : 'graduate-nickname-male';
+    const noWrapNicknameClass = graduate.name === '田中柚希' ? 'graduate-nickname-nowrap' : '';
 
     const photoSlots = [0, 1, 2]
       .map((index) => {
@@ -635,7 +678,7 @@ if (graduateProfiles) {
     card.innerHTML = `
       <div class="graduate-main">
         <h3>${graduate.name}</h3>
-        <p class="graduate-nickname ${nicknameClass}">『${graduate.nickname || '未入力'}』</p>
+        <p class="graduate-nickname ${nicknameClass} ${noWrapNicknameClass}">『${graduate.nickname || '未入力'}』</p>
         <p><strong>大学:</strong> ${graduate.university || '未入力'}</p>
         <p><strong>生年月日:</strong> ${normalizeBirthdate(graduate.birthdate)}</p>
         <p class="graduate-description">${graduate.description || 'ここに紹介文を入力してください。'}</p>

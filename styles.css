@@ -864,6 +864,18 @@ main {
   font-size: 0.9rem;
 }
 
+.day-extra-slot-image {
+  padding: 0;
+  overflow: hidden;
+}
+
+.day-extra-slot-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .day-chip-rect {
   border-radius: 10px;
   padding-inline: 0.95rem;
@@ -1029,6 +1041,40 @@ main {
   gap: 0.45rem;
 }
 
+@media (min-width: 721px) {
+  .event-panel-maharaja {
+    align-items: stretch;
+  }
+
+  .event-panel-maharaja .event-photo-grid {
+    height: 100%;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    align-content: stretch;
+  }
+
+  .event-panel-maharaja .event-photo-fixed {
+    height: 100%;
+    min-height: 0;
+  }
+}
+
+@media (min-width: 721px) {
+  .event-panel-day2-primary {
+    align-items: stretch;
+  }
+
+  .event-panel-day2-primary .event-photo-grid {
+    height: 100%;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    align-content: stretch;
+  }
+
+  .event-panel-day2-primary .event-photo-fixed {
+    height: 100%;
+    min-height: 0;
+  }
+}
+
 .day-column-day1 .day-header-card {
   padding: 0.5rem 0.62rem 0.48rem;
   margin-bottom: 0.45rem;
@@ -1129,6 +1175,15 @@ main {
   color: var(--muted);
 }
 
+.movie-embed-video {
+  width: 100%;
+  max-height: 72vh;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #000;
+  display: block;
+}
+
 .movie-slot-grid {
   margin-top: 0.7rem;
   display: grid;
@@ -1152,6 +1207,14 @@ main {
   color: var(--accent-2);
   font-size: 0.82rem;
   letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-song-nowrap {
+  white-space: nowrap;
+  font-size: 0.75rem;
 }
 
 .movie-slot-placeholder {
@@ -1179,13 +1242,14 @@ main {
 .movie-link-list {
   margin-top: 0.7rem;
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0.7rem;
 }
 
 .movie-link-card {
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 0.7rem;
+  padding: 0.62rem;
 }
 
 .movie-link-card h4 {
@@ -1194,6 +1258,10 @@ main {
 
 .movie-link-card p {
   margin-top: 0.3rem;
+}
+
+.movie-link-card .movie-slot-video {
+  max-height: 170px;
 }
 
 .graduate-profiles {
@@ -1236,6 +1304,13 @@ main {
 
 .graduate-main p.graduate-nickname-female {
   color: #ff7bcf;
+}
+
+.graduate-main p.graduate-nickname-nowrap {
+  white-space: nowrap;
+  font-size: clamp(0.9rem, 1.55vw, 1.35rem);
+  letter-spacing: 0.005em;
+  line-height: 1.2;
 }
 
 .graduate-description {
@@ -1307,6 +1382,25 @@ main {
   overflow: hidden;
   border: 1px solid var(--line);
   cursor: zoom-in;
+}
+
+.photo-card-placeholder {
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-style: dashed;
+  cursor: default;
+}
+
+.photo-card-placeholder-text {
+  padding: 0.35rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--muted);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.18);
 }
 
 .photo-card img {
@@ -1532,6 +1626,20 @@ textarea::placeholder {
 
   .schedule li {
     grid-template-columns: 96px 1fr;
+  }
+
+  .photo-archive-grid {
+    grid-template-columns: repeat(auto-fill, minmax(106px, 1fr));
+    gap: 0.42rem;
+  }
+
+  .photo-modal {
+    padding: 0.6rem;
+  }
+
+  .photo-modal img {
+    max-width: 96vw;
+    max-height: 82vh;
   }
 }
 
