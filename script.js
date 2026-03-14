@@ -310,6 +310,7 @@ if (personalMovieGrid) {
     永樂心優: 'assets/movies/eiraku-miyu.mp4',
     成本茉莉: 'assets/movies/narimoto-matsuri.mp4',
     西田典立: 'assets/movies/nishida-norisato.mp4',
+    辻拓真: 'assets/movies/tsuji-takuma.mp4',
     小比賀華子: 'assets/movies/kobiga-hanako.mp4',
     岩佐茅咲: 'assets/movies/iwasa-chisaki.mp4',
     荒岡美夢: 'assets/movies/araoka-miyu.mp4',
@@ -524,7 +525,7 @@ if (graduateProfiles) {
     },
     {
       name: '園田響己',
-      university: '同志社商学部',
+      university: '同志社大学商学部',
       birthdate: '2004/03.04',
       nickname: 'お世話になりました。',
       description:
