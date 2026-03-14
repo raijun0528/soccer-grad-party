@@ -17,6 +17,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 body {
@@ -46,6 +47,12 @@ p {
 a {
   color: inherit;
   text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+img,
+video {
+  max-width: 100%;
 }
 
 .noise {
@@ -214,6 +221,7 @@ main,
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   padding: 1rem 0;
   backdrop-filter: blur(10px);
   z-index: 50;
@@ -221,6 +229,7 @@ main,
 
 .logo {
   font-size: clamp(1.1rem, 2.6vw, 1.45rem);
+  min-width: 0;
 }
 
 .nav {
@@ -232,6 +241,7 @@ main,
   color: var(--muted);
   font-weight: 700;
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 .nav a:hover {
@@ -351,7 +361,7 @@ main {
 
 .hero-title-en span {
   display: block;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .hero-subtitle {
@@ -494,7 +504,7 @@ main {
   letter-spacing: 0.015em;
   line-height: 1.02;
   max-width: 10.2ch;
-  text-wrap: nowrap;
+  text-wrap: balance;
 }
 
 .about-copy {
@@ -1207,9 +1217,8 @@ main {
   color: var(--accent-2);
   font-size: 0.82rem;
   letter-spacing: 0.01em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .movie-song-nowrap {
@@ -1307,7 +1316,7 @@ main {
 }
 
 .graduate-main p.graduate-nickname-nowrap {
-  white-space: nowrap;
+  white-space: normal;
   font-size: clamp(0.9rem, 1.55vw, 1.35rem);
   letter-spacing: 0.005em;
   line-height: 1.2;
@@ -1545,6 +1554,11 @@ textarea::placeholder {
     min-height: 0;
   }
 
+  .hero-actions .btn {
+    flex: 1 1 calc(50% - 0.52rem);
+    text-align: center;
+  }
+
   .hero-copy {
     max-width: 100%;
   }
@@ -1561,12 +1575,52 @@ textarea::placeholder {
 }
 
 @media (max-width: 720px) {
+  .site-header,
+  main,
+  .site-footer {
+    width: min(var(--max), calc(100vw - 1rem));
+  }
+
+  main {
+    gap: 3rem;
+    padding-block: 1.2rem 4.2rem;
+  }
+
+  .site-header {
+    padding: 0.85rem 0;
+  }
+
+  .logo {
+    max-width: calc(100vw - 96px);
+    line-height: 1;
+  }
+
   .intro-graduates ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .intro-screen {
+    padding: 1.6rem 0.8rem 3.6rem;
+  }
+
+  .intro-screen h1 {
+    padding: 0.6rem 0.8rem;
+    border-radius: 14px;
+    font-size: clamp(2.3rem, 12vw, 4.3rem);
+  }
+
+  .intro-graduates {
+    width: 100%;
+    padding: 0.72rem 0.7rem;
+  }
+
+  .intro-graduates li {
+    font-size: 0.76rem;
+  }
+
   .menu-btn {
     display: block;
+    flex: 0 0 auto;
   }
 
   .nav {
@@ -1586,6 +1640,28 @@ textarea::placeholder {
     display: flex;
   }
 
+  .hero h1 {
+    max-width: none;
+  }
+
+  .hero-message {
+    padding: 0.9rem;
+  }
+
+  .hero-copy {
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
   .hero-info-grid,
   .photo-grid,
   .item-grid {
@@ -1593,11 +1669,18 @@ textarea::placeholder {
   }
 
   .about-reel {
-    min-height: 430px;
+    min-height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+    padding: 0.55rem;
+    border-style: solid;
   }
 
   .about-reel-photo {
-    width: clamp(84px, 24vw, 132px);
+    position: static;
+    width: 100%;
+    transform: none;
   }
 
   .hero {
@@ -1610,6 +1693,12 @@ textarea::placeholder {
 
   .event-panel {
     grid-template-columns: 1fr;
+  }
+
+  .day-header-card h4,
+  .day-column-day1 .day-header-card h4,
+  .day-column-jankara .day-header-card h4 {
+    font-size: clamp(1.2rem, 6vw, 1.55rem);
   }
 
   .event-photo-grid {
@@ -1626,6 +1715,20 @@ textarea::placeholder {
 
   .schedule li {
     grid-template-columns: 96px 1fr;
+  }
+
+  .event-program-list li span {
+    min-width: 0;
+    display: block;
+    margin-bottom: 0.08rem;
+  }
+
+  .graduate-profile {
+    padding: 0.8rem;
+  }
+
+  .graduate-photos {
+    grid-template-columns: 1fr;
   }
 
   .photo-archive-grid {
@@ -1694,5 +1797,40 @@ textarea::placeholder {
   .graduate-profiles .graduate-profile.is-reverse .graduate-main,
   .graduate-profiles .graduate-profile.is-reverse .graduate-photos {
     order: initial;
+  }
+}
+
+@media (max-width: 560px) {
+  .intro-graduates ul {
+    gap: 0.22rem 0.55rem;
+  }
+
+  .schedule,
+  .list-section,
+  .memories,
+  .about,
+  .hero {
+    border-radius: 16px;
+    padding-inline: 0.82rem;
+  }
+
+  .timeline-arrow {
+    min-height: 52px;
+    font-size: 1.6rem;
+  }
+
+  .event-panel,
+  .movie-block,
+  .graduate-profile {
+    padding: 0.7rem;
+  }
+
+  .movie-slot-grid,
+  .movie-link-list {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-archive-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
