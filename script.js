@@ -69,18 +69,39 @@ const thirdYearGallery = document.getElementById('photo-gallery-3rd');
 const secondYearGallery = document.getElementById('photo-gallery-2nd');
 const firstYearGallery = document.getElementById('photo-gallery-1st');
 const day1Gallery = document.getElementById('photo-gallery-day1');
+const day2MaharajaGallery = document.getElementById('photo-gallery-day2-maharaja');
 const photoArchiveSection = document.getElementById('photoarchive');
 const photoModal = document.getElementById('photo-modal');
 const photoModalImage = document.getElementById('photo-modal-image');
 const photoModalClose = document.getElementById('photo-modal-close');
+const photoModalPrev = document.getElementById('photo-modal-prev');
+const photoModalNext = document.getElementById('photo-modal-next');
+const modalPhotos = [];
+let currentModalPhotoIndex = -1;
 
-const openPhotoModal = (src, alt) => {
+const registerModalPhoto = (img) => {
+  const existing = modalPhotos.indexOf(img);
+  if (existing !== -1) return existing;
+  modalPhotos.push(img);
+  return modalPhotos.length - 1;
+};
+
+const openPhotoModalByIndex = (index) => {
   if (!photoModal || !photoModalImage) return;
-  photoModalImage.src = src;
-  photoModalImage.alt = alt;
+  const target = modalPhotos[index];
+  if (!target) return;
+  currentModalPhotoIndex = index;
+  photoModalImage.src = target.src;
+  photoModalImage.alt = target.alt;
   photoModal.classList.add('open');
   photoModal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
+};
+
+const movePhotoModal = (step) => {
+  if (!photoModal?.classList.contains('open') || modalPhotos.length === 0) return;
+  const nextIndex = (currentModalPhotoIndex + step + modalPhotos.length) % modalPhotos.length;
+  openPhotoModalByIndex(nextIndex);
 };
 
 const closePhotoModal = () => {
@@ -88,11 +109,26 @@ const closePhotoModal = () => {
   photoModal.classList.remove('open');
   photoModal.setAttribute('aria-hidden', 'true');
   photoModalImage.src = '';
+  currentModalPhotoIndex = -1;
   document.body.classList.remove('modal-open');
 };
 
 if (photoModalClose) {
   photoModalClose.addEventListener('click', closePhotoModal);
+}
+
+if (photoModalPrev) {
+  photoModalPrev.addEventListener('click', (event) => {
+    event.stopPropagation();
+    movePhotoModal(-1);
+  });
+}
+
+if (photoModalNext) {
+  photoModalNext.addEventListener('click', (event) => {
+    event.stopPropagation();
+    movePhotoModal(1);
+  });
 }
 
 if (photoModal) {
@@ -106,6 +142,13 @@ if (photoModal) {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     closePhotoModal();
+    return;
+  }
+  if (!photoModal?.classList.contains('open')) return;
+  if (event.key === 'ArrowLeft') {
+    movePhotoModal(-1);
+  } else if (event.key === 'ArrowRight') {
+    movePhotoModal(1);
   }
 });
 
@@ -121,7 +164,8 @@ const renderPhotoGallery = ({ gallery, photoCount, directory, altPrefix }) => {
     img.alt = `${altPrefix} ${i}`;
     img.loading = 'lazy';
     img.decoding = 'async';
-    img.addEventListener('click', () => openPhotoModal(img.src, img.alt));
+    const modalIndex = registerModalPhoto(img);
+    img.addEventListener('click', () => openPhotoModalByIndex(modalIndex));
 
     figure.appendChild(img);
     gallery.appendChild(figure);
@@ -159,7 +203,8 @@ const renderPhotoGalleryRange = ({
     img.alt = `${altPrefix} ${i}`;
     img.loading = 'lazy';
     img.decoding = 'async';
-    img.addEventListener('click', () => openPhotoModal(img.src, img.alt));
+    const modalIndex = registerModalPhoto(img);
+    img.addEventListener('click', () => openPhotoModalByIndex(modalIndex));
 
     figure.appendChild(img);
     gallery.appendChild(figure);
@@ -192,6 +237,15 @@ const renderPhotoArchive = () => {
     end: 117,
     directory: 'day1-futsal',
     altPrefix: 'DAY1 フットサル',
+    randomize: true,
+  });
+
+  renderPhotoGalleryRange({
+    gallery: day2MaharajaGallery,
+    start: 1,
+    end: 146,
+    directory: 'day2-maharaja-archive',
+    altPrefix: 'DAY2 マハラジャ祇園',
     randomize: true,
   });
 
@@ -346,7 +400,7 @@ if (personalMovieGrid) {
     奥原沙理: '常識の範疇',
     久保田圭祐: 'タマシイレボリューション',
     長谷川斗空: 'はちゃめちゃわちゃライフ！',
-    布山達也: '完全感覚ドリーマー',
+    布山達也: '完全感覚Dreamer',
     磯崎友希: '突破口',
     小玉拓未: 'はじまり',
     堀内うらら: 'エッジワース・カイパーベルト',
@@ -764,6 +818,7 @@ if (graduateProfiles) {
     const target = event.target;
     if (!(target instanceof HTMLImageElement)) return;
     if (!target.closest('.graduate-photo-slot.has-image')) return;
-    openPhotoModal(target.src, target.alt);
+    const modalIndex = registerModalPhoto(target);
+    openPhotoModalByIndex(modalIndex);
   });
 }

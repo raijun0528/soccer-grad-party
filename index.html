@@ -218,10 +218,10 @@
             </div>
             <div class="event-photo-grid">
               <figure class="event-photo-slot event-photo-fixed">
-                <img src="./assets/day2-maharaja.jpg" alt="DAY2 1次会 マハラジャ祇園の集合写真" loading="lazy" decoding="async" />
+                <img src="./assets/day2-maharaja-card-1.jpg" alt="DAY2 1次会 マハラジャ祇園の集合写真" loading="lazy" decoding="async" />
               </figure>
               <figure class="event-photo-slot event-photo-fixed">
-                <img src="./assets/day1-futsal-group.jpg" alt="DAY2 1次会 マハラジャ祇園の集合写真 2" loading="lazy" decoding="async" />
+                <img src="./assets/day2-maharaja-card-2b.png" alt="DAY2 1次会 マハラジャ祇園の集合写真 2" loading="lazy" decoding="async" />
               </figure>
             </div>
           </article>
@@ -239,16 +239,15 @@
                 <p><strong>＠時間</strong> 22:00 - 24:00</p>
               </div>
               <div class="bottom-action">
-                <a class="cta-button" href="#quiz-info">当日のクイズ資料はこちら</a>
                 <a class="cta-button" href="#photoarchive-day2-nanana">当日の写真はこちら</a>
               </div>
             </div>
             <div class="event-photo-grid">
               <figure class="event-photo-slot event-photo-fixed">
-                <img src="./assets/day2-nanana-1.jpg" alt="DAY2 2次会 NANANAの乾杯写真" loading="lazy" decoding="async" />
+                <img src="./assets/day2-nanana-new-1.jpg" alt="DAY2 2次会 NANANAの乾杯写真" loading="lazy" decoding="async" />
               </figure>
               <figure class="event-photo-slot event-photo-fixed">
-                <img src="./assets/day2-nanana-2.jpg" alt="DAY2 2次会 NANANAの会場写真" loading="lazy" decoding="async" />
+                <img src="./assets/day2-nanana-new-2.jpg" alt="DAY2 2次会 NANANAの会場写真" loading="lazy" decoding="async" />
               </figure>
             </div>
           </article>
@@ -259,10 +258,15 @@
             <div class="event-main day-column day-column-jankara">
               <div class="day-header-card">
                 <p class="day-chip day-chip-rect">DAY2</p>
-                <h4>3次会 ジャンカラ 四条河原町店</h4>
+                <h4 class="jankara-title-split">
+                  <span class="jankara-title-main">3次会</span>
+                  <span class="jankara-title-venue">ジャンカラ 四条河原町店</span>
+                  <span class="jankara-title-divider" aria-hidden="true"></span>
+                  <span class="jankara-title-sub">スーパージャンカラ河原町本店プレミアム</span>
+                </h4>
               </div>
               <div class="info-block">
-                <p><strong>＠場所</strong> ジャンカラ 四条河原町店</p>
+                <p><strong>＠場所</strong> スーパージャンカラ河原町本店プレミアム</p>
                 <p><strong>＠時間</strong> 24:00 - morning</p>
               </div>
               <div class="bottom-action">
@@ -273,7 +277,7 @@
                 <img src="./assets/day2-jankara-logo.jpg" alt="ジャンカラのロゴ画像" loading="lazy" decoding="async" />
               </figure>
               <figure class="event-photo-slot event-photo-fixed">
-                <img src="./assets/day2-jankara-group.jpg" alt="DAY2 3次会 ジャンカラの集合写真" loading="lazy" decoding="async" />
+                <img src="./assets/day2-jankara-group-new.jpg" alt="DAY2 3次会 ジャンカラの集合写真" loading="lazy" decoding="async" />
               </figure>
             </div>
           </article>
@@ -313,27 +317,19 @@
             <div class="movie-link-list">
               <article class="movie-link-card">
                 <h4>Anfini 26期会長　吉田拓馬</h4>
-                <p>Anfini26</p>
                 <video class="movie-slot-video" controls preload="metadata" src="./assets/movies/yoshida-takuma.mp4"></video>
               </article>
               <article class="movie-link-card">
                 <h4>26期のリオネルメッシ　中川龍馬</h4>
-                <p>動画リンクをここに追加</p>
+                <video class="movie-slot-video" controls preload="metadata" src="./assets/movies/nakagawa-ryoma.mp4"></video>
               </article>
               <article class="movie-link-card">
                 <h4>Anfini 26期　福崎諒介</h4>
-                <p>福崎</p>
                 <video class="movie-slot-video" controls preload="metadata" src="./assets/movies/fukuzaki-ryosuke.mp4"></video>
               </article>
             </div>
           </section>
         </div>
-      </section>
-
-      <section id="quiz-info" class="list-section reveal">
-        <p class="eyebrow">Quiz</p>
-        <h2>当日のクイズ・解説</h2>
-        <p class="photo-coming-soon">掲載予定です。</p>
       </section>
 
       <section id="photoarchive" class="memories reveal">
@@ -348,7 +344,7 @@
         </section>
         <section class="photo-group" aria-labelledby="photoarchive-day2-maharaja">
           <h3 id="photoarchive-day2-maharaja" class="photo-group-title">DAY2 マハラジャ祇園</h3>
-          <p class="photo-coming-soon">掲載予定です。</p>
+          <div id="photo-gallery-day2-maharaja" class="photo-grid photo-archive-grid" aria-label="DAY2 マハラジャ祇園のフォトギャラリー"></div>
         </section>
         <section class="photo-group" aria-labelledby="photoarchive-day2-nanana">
           <h3 id="photoarchive-day2-nanana" class="photo-group-title">DAY2 NANANA</h3>
@@ -380,7 +376,9 @@
 
     <div id="photo-modal" class="photo-modal" aria-hidden="true">
       <button id="photo-modal-close" class="photo-modal-close" aria-label="拡大画像を閉じる">×</button>
+      <button id="photo-modal-prev" class="photo-modal-nav photo-modal-prev" aria-label="前の写真を見る">‹</button>
       <img id="photo-modal-image" src="" alt="" />
+      <button id="photo-modal-next" class="photo-modal-nav photo-modal-next" aria-label="次の写真を見る">›</button>
     </div>
 
     <footer class="site-footer">
