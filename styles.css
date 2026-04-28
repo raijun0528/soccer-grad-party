@@ -499,12 +499,14 @@ main {
 }
 
 .about h2 {
-  font-size: clamp(1.8rem, 4vw, 3.3rem);
+  font-size: clamp(1rem, 3.2vw, 3.2rem);
   margin-top: 0.42rem;
   letter-spacing: 0.015em;
-  line-height: 1.02;
-  max-width: 10.2ch;
-  text-wrap: balance;
+  line-height: 1;
+  max-width: none;
+  overflow-wrap: normal;
+  white-space: nowrap;
+  word-break: keep-all;
 }
 
 .about-copy {
